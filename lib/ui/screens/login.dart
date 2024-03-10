@@ -22,20 +22,20 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Login'),
+      appBar: const CustomAppBar(title: 'Login'),
       body: SafeArea(
         child: Column(
           children: [
             Center(
               child: ElevatedButton(
                 onPressed: () => _signInAsGuest(context),
-                child: Text('Sign in as guest'),
+                child: const Text('Sign in as guest'),
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: AppBottomNavigation(),
+      bottomNavigationBar: const AppBottomNavigation(),
     );
   }
 }

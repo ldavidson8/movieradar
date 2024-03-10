@@ -12,7 +12,7 @@ class Favourites extends StatelessWidget {
       body: SafeArea(
         child: Column(),
       ),
-      bottomNavigationBar: AppBottomNavigation(),
+      bottomNavigationBar: const AppBottomNavigation(),
     );
   }
 }

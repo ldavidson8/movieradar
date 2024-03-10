@@ -35,9 +35,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
       child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is Authenticated) {
-            return Text('Logout');
+            return const Text('Logout');
           } else {
-            return Text('Login');
+            return const Text('Login');
           }
         },
       ),

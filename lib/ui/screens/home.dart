@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: Column(),
       ),
-      bottomNavigationBar: AppBottomNavigation(),
+      bottomNavigationBar: const AppBottomNavigation(),
     );
   }
 }
