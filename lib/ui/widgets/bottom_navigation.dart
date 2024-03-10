@@ -30,8 +30,6 @@ class AppBottomNavigationState extends State<AppBottomNavigation> {
     ),
   ];
 
-  final List<String> routes = ['/home', '/search', '/favourites', '/settings'];
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationBloc, int>(
@@ -44,7 +42,7 @@ class AppBottomNavigationState extends State<AppBottomNavigation> {
                 context
                     .read<BottomNavigationBloc>()
                     .add(BottomNavigationEvent.homeTapped);
-                context.go('/home');
+                context.go('/');
                 break;
               case 1:
                 context

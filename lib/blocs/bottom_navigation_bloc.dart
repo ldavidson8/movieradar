@@ -8,22 +8,25 @@ enum BottomNavigationEvent {
 }
 
 class BottomNavigationBloc extends Bloc<BottomNavigationEvent, int> {
-  BottomNavigationBloc() : super(0);
-
-  Stream<int> mapEventToState(BottomNavigationEvent event) async* {
-    switch (event) {
-      case BottomNavigationEvent.homeTapped:
-        yield 0;
-        break;
-      case BottomNavigationEvent.searchTapped:
-        yield 1;
-        break;
-      case BottomNavigationEvent.favouritesTapped:
-        yield 2;
-        break;
-      case BottomNavigationEvent.settingsTapped:
-        yield 3;
-        break;
-    }
+  BottomNavigationBloc() : super(0) {
+    on<BottomNavigationEvent>((event, emit) {
+      switch (event) {
+        case BottomNavigationEvent.homeTapped:
+          emit(0);
+          break;
+        case BottomNavigationEvent.searchTapped:
+          emit(1);
+          break;
+        case BottomNavigationEvent.favouritesTapped:
+          emit(2);
+          break;
+        case BottomNavigationEvent.settingsTapped:
+          emit(3);
+          break;
+        default:
+          emit(0);
+          break;
+      }
+    });
   }
 }
