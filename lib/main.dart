@@ -23,7 +23,7 @@ void main() async {
         ),
         BlocProvider<ThemeBloc>(
           create: (context) => ThemeBloc(),
-        )
+        ),
       ],
       child: const MovieRadarApp(),
     ),

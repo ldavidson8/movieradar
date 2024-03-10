@@ -48,8 +48,7 @@ final GoRouter _router = GoRouter(
     ),
     transitionGoRoute(
       path: '/settings',
-      pageBuilder: (BuildContext context, GoRouterState state) =>
-          const Settings(),
+      pageBuilder: (BuildContext context, GoRouterState state) => Settings(),
     ),
     transitionGoRoute(
       path: '/movie:id',

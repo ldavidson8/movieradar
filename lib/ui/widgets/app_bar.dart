@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movieradar/blocs/authentication/authentication_bloc.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  CustomAppBar({super.key, required this.title});
+  const CustomAppBar({super.key, required this.title});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -18,7 +18,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   final Widget avatarCircle = const CircleAvatar(
     radius: 20.0,
-    backgroundImage: AssetImage('assets/images/avatar.png'),
+    backgroundImage: NetworkImage('https://avatar.vercel.sh/rauchg?size=30'),
   );
 
   final List<PopupMenuEntry<String>> _menuItems = [
@@ -49,23 +49,24 @@ class _CustomAppBarState extends State<CustomAppBar> {
       title: Text(widget.title),
       actions: <Widget>[
         PopupMenuButton<String>(
-            icon: avatarCircle,
-            onSelected: (String value) {
-              switch (value) {
-                case '1':
-                  context.go('/profile');
-                  break;
-                case '2':
-                  context.go('/settings');
-                  break;
-                case '3':
-                  context.go('/login');
-                  break;
-                default:
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) => _menuItems),
+          icon: avatarCircle,
+          onSelected: (String value) {
+            switch (value) {
+              case '1':
+                context.go('/profile');
+                break;
+              case '2':
+                context.go('/settings');
+                break;
+              case '3':
+                context.go('/login');
+                break;
+              default:
+                break;
+            }
+          },
+          itemBuilder: (BuildContext context) => _menuItems,
+        ),
       ],
     );
   }
