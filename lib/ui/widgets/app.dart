@@ -66,8 +66,8 @@ class MovieRadarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      title: 'MovieRadar',
       debugShowCheckedModeBanner: false,
-      title: 'movieradar',
       theme: AppTheme.lightTheme,
       routerConfig: _router,
       darkTheme: AppTheme.darkTheme,

@@ -3,14 +3,16 @@ import 'package:movieradar/ui/widgets/app_bar.dart';
 import 'package:movieradar/ui/widgets/bottom_navigation.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(title: 'Settings'),
       body: SafeArea(
-        child: Text('Home Page'),
+        child: Column(
+          children: [],
+        ),
       ),
       bottomNavigationBar: AppBottomNavigation(),
     );

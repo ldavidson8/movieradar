@@ -8,9 +8,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(title: 'Home'),
       body: SafeArea(
-        child: Text('Home Page'),
+        child: Column(),
       ),
       bottomNavigationBar: AppBottomNavigation(),
     );

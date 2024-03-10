@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
   Future<void> _signInAsGuest(BuildContext context) async {
     try {
       final UserCredential userCredential = await _auth.signInAnonymously();
-      context.go('/home');
+      context.go('/');
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error logging in: ${e.message!}')));

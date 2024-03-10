@@ -25,7 +25,7 @@ void main() async {
           create: (context) => ThemeBloc(),
         )
       ],
-      child: MovieRadarApp(),
+      child: const MovieRadarApp(),
     ),
   );
 }
