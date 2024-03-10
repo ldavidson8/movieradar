@@ -36,6 +36,8 @@ class AppBottomNavigationState extends State<AppBottomNavigation> {
       builder: (context, currentindex) {
         return BottomNavigationBar(
           currentIndex: currentindex,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Theme.of(context).primaryColor,
           onTap: (index) {
             switch (index) {
               case 0:

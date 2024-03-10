@@ -7,7 +7,7 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(title: 'Search'),
       body: SafeArea(
         child: Column(),

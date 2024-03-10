@@ -33,6 +33,7 @@ dependencies:
   bloc_provider: ^1.0.0
   cached_network_image: ^3.3.1
   cupertino_icons: ^1.0.2
+  dropdown_button2: ^2.3.9
   email_validator: ^2.1.16
   equatable: ^2.0.5
   firebase_analytics: ^10.8.0

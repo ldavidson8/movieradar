@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:movieradar/themes.dart';
+import 'package:movieradar/ui/screens/login.dart';
 
 import '../screens/home.dart';
 import '../screens/search.dart';
@@ -56,6 +57,10 @@ final GoRouter _router = GoRouter(
         final String id = state.pathParameters['id']!;
         return MoviePage(id: id);
       },
+    ),
+    transitionGoRoute(
+      path: '/login',
+      pageBuilder: (BuildContext context, GoRouterState state) => LoginScreen(),
     ),
   ],
 );

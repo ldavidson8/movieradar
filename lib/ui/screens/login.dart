@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movieradar/ui/widgets/app_bar.dart';
+import 'package:movieradar/ui/widgets/bottom_navigation.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -20,17 +22,20 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(title: 'Login'),
       body: SafeArea(
         child: Column(
           children: [
-            Text('Login'),
-            ElevatedButton(
-              onPressed: () => _signInAsGuest(context),
-              child: Text('Sign in as guest'),
+            Center(
+              child: ElevatedButton(
+                onPressed: () => _signInAsGuest(context),
+                child: Text('Sign in as guest'),
+              ),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: AppBottomNavigation(),
     );
   }
 }
