@@ -120,5 +120,9 @@ abstract class AppColors {
   static const Color darkMuted = Color(0xFF9D9D9D);
   static const Color darkInputBorderColour = Color(0xFF333333);
 
+  static const Color darkPurpleBackground = Color(0xFF0E0217);
+
+  static const Color darkBlueBackground = Color.fromARGB(255, 1, 4, 23);
+
   static const Color trueBlack = Color(0xFF000000);
 }

@@ -48,7 +48,7 @@ class SettingsState extends State<Settings>
                 SettingsTab(),
               ],
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: const AppBottomNavigation(),
