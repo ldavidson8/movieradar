@@ -10,6 +10,10 @@ abstract class AppThemes {
         colorScheme:
             const ColorScheme.light(background: AppColors.lightBackground),
         scaffoldBackgroundColor: AppColors.lightBackground,
+        cardTheme: CardTheme(
+          color: AppColors.lightBackground,
+          surfaceTintColor: AppColors.lightBackground,
+        ),
         textTheme: const TextTheme().apply(
           fontFamily: BaseTheme.bodyBase.fontFamily,
           bodyColor: AppColors.lightBody,
@@ -20,7 +24,7 @@ abstract class AppThemes {
         ),
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.lightInputBorderBolour),
+            borderSide: BorderSide(color: AppColors.lightInputBorderColour),
           ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -50,6 +54,7 @@ abstract class AppThemes {
         colorScheme:
             const ColorScheme.dark(background: AppColors.darkBackground),
         scaffoldBackgroundColor: AppColors.darkBackground,
+        cardColor: AppColors.darkBackground,
         textTheme: const TextTheme().apply(
           fontFamily: BaseTheme.bodyBase.fontFamily,
           bodyColor: AppColors.darkBody,
@@ -67,6 +72,19 @@ abstract class AppThemes {
           backgroundColor: AppColors.trueBlack,
           unselectedItemColor: AppColors.darkMuted,
           selectedItemColor: AppColors.colorPrimary,
+        ),
+        tabBarTheme: const TabBarTheme(
+          labelColor: AppColors.darkBody,
+          unselectedLabelColor: AppColors.darkMuted,
+          indicatorColor: AppColors.darkBody,
+          splashFactory: NoSplash.splashFactory,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.darkBody,
+              foregroundColor: AppColors.darkBackground,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5))),
         ),
       );
 

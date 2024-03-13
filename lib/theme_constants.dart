@@ -112,9 +112,9 @@ abstract class AppColors {
   static const Color lightBodyLight = Color(0xFFE5E7EB);
   static const Color lightMuted = Color(0xFF666666);
   static const Color lightBorderGrey = Color(0xFFEBEBEB);
-  static const Color lightInputBorderBolour = Color(0xFFEAEAEA);
+  static const Color lightInputBorderColour = Color(0xFFEAEAEA);
 
-  static const Color darkBackground = Color(0xFF202020);
+  static const Color darkBackground = Color(0xFF101010);
   static const Color darkBody = Color(0xFFFAFAFA);
   static const Color darkBodyLight = Color(0xFFD9D9D9);
   static const Color darkMuted = Color(0xFF9D9D9D);

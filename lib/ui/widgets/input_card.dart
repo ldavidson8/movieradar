@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieradar/theme_constants.dart';
 
 class InputCard extends StatelessWidget {
   const InputCard({
@@ -23,13 +24,18 @@ class InputCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color? containerColor = bottomContainerColor ?? Colors.grey[400];
+    final Color containerColor =
+        Theme.of(context).brightness == Brightness.light
+            ? AppColors.lightBackgroundGrey
+            : AppColors.darkBackground;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
         side: BorderSide(color: Colors.grey[600]!, width: 1.0),
       ),
-      color: Colors.black,
+      color: Theme.of(context).cardColor,
+      surfaceTintColor: Colors.transparent,
       child: Column(
         children: <Widget>[
           Padding(
@@ -79,9 +85,11 @@ class InputCard extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: containerColor,
-              border: const Border.symmetric(
+              border: Border.symmetric(
                 horizontal: BorderSide(
-                  color: Colors.grey,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? AppColors.lightBorderGrey
+                      : AppColors.darkInputBorderColour,
                 ),
               ),
               borderRadius: BorderRadius.circular(8.0),
@@ -98,25 +106,17 @@ class InputCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 16),
                       child: Text(
                         statusText,
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
+                        ),
                         overflow: TextOverflow.fade,
                       ),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      backgroundColor:
-                          Theme.of(context).buttonTheme.colorScheme!.primary,
-                      foregroundColor: Theme.of(context)
-                          .buttonTheme
-                          .colorScheme!
-                          .inversePrimary,
-                    ),
+                    style: Theme.of(context).elevatedButtonTheme.style,
                     child: Text(buttonText,
                         style: const TextStyle(fontWeight: FontWeight.bold)),
                   ),
