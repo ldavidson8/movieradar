@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:movieradar/blocs/authentication/authentication_bloc.dart';
+import 'package:movieradar/blocs/movies/movies_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:movieradar/blocs/bottom_navigation_bloc.dart';
 import 'package:movieradar/cubits/theme_cubit.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
         ? HydratedStorage.webStorageDirectory
         : await getApplicationDocumentsDirectory(),
   );
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -34,6 +36,9 @@ Future<void> main() async {
         BlocProvider(
           create: (_) => ThemeCubit(),
         ),
+        BlocProvider<MoviesBloc>(
+          create: (context) => MoviesBloc(),
+        )
       ],
       child: const MovieRadarApp(),
     ),

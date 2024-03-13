@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:movieradar/cubits/theme_cubit.dart';
 import 'package:movieradar/themes.dart';
-import 'package:movieradar/ui/screens/login.dart';
 
-import '../screens/home.dart';
-import '../screens/search.dart';
-import '../screens/favourites.dart';
-import '../screens/settings.dart';
-import '../screens/movie_page.dart';
+import 'package:movieradar/ui/screens/home.dart';
+import 'package:movieradar/ui/screens/search.dart';
+import 'package:movieradar/ui/screens/favourites.dart';
+import 'package:movieradar/ui/screens/settings.dart';
+import 'package:movieradar/ui/screens/login.dart';
+import 'package:movieradar/ui/screens/movie_page.dart';
 
 GoRoute transitionGoRoute({
   required String path,
@@ -70,13 +71,17 @@ class MovieRadarApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'MovieRadar',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      routerConfig: _router,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+    return BlocBuilder<ThemeCubit, ThemeMode>(
+      builder: (context, ThemeMode mode) {
+        return MaterialApp.router(
+          title: 'MovieRadar',
+          debugShowCheckedModeBanner: false,
+          routerConfig: _router,
+          themeMode: mode,
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+        );
+      },
     );
   }
 }

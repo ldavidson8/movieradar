@@ -10,26 +10,29 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: const CustomAppBar(title: 'Movies'),
+        appBar: CustomAppBar(title: 'Movies'),
         body: SafeArea(
           child: Column(
             children: [
               TabBar(
-                tabs: const [
+                tabs: [
                   Tab(text: 'Movies'),
                   Tab(text: 'Series'),
                   Tab(text: 'New & Trending'),
                 ],
               ),
-              Expanded(
-                  child: TabBarView(children: [
-                MoviesTab(),
-                TvSeriesTab(),
-                NewTrendingTab(),
-              ])),
+              Flexible(
+                child: TabBarView(
+                  children: [
+                    MoviesTab(),
+                    TvSeriesTab(),
+                    NewTrendingTab(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

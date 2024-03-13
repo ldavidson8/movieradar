@@ -3,7 +3,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class Constants {
-  static final TMDB_API_KEY = dotenv.env['TMDB_API_KEY'];
+  static String? TMDB_API_KEY = dotenv.env['TMDB_API_KEY'];
 
   static final BEARER_TOKEN = dotenv.env['BEARER_TOKEN'];
 
