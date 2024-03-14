@@ -16,9 +16,18 @@ class MovieDetailAppBar extends StatelessWidget {
           onTap: () {
             context.go('/');
           },
-          child: const Icon(
-            Icons.chevron_left,
-            color: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.7),
+              shape: BoxShape.circle, // This will make the background circle
+            ),
+            padding: const EdgeInsets.all(
+              8,
+            ), // Adjust this to change the padding around the icon
+            child: const Icon(
+              Icons.chevron_left,
+              color: Colors.white,
+            ),
           ),
         ),
         GestureDetector(
@@ -26,10 +35,19 @@ class MovieDetailAppBar extends StatelessWidget {
             final dbHelper = DatabaseHelper.instance;
             await dbHelper.addFavouriteMovie(movie);
           },
-          child: const Icon(
-            Icons.favorite_border,
-            color: Colors.white,
-            size: 30,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.7),
+              shape: BoxShape.circle, // This will make the background circle
+            ),
+            padding: const EdgeInsets.all(
+              8,
+            ), // Adjust this to change the padding around the icon
+            child: const Icon(
+              Icons.favorite_border,
+              color: Colors.white,
+              size: 30,
+            ),
           ),
         ),
       ],
