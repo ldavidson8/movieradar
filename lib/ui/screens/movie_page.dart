@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieradar/blocs/moviecredit/movie_credit_cubit.dart';
 import 'package:movieradar/blocs/moviedetail/movie_detail_cubit.dart';
+import 'package:movieradar/data/database_helper.dart';
 import 'package:movieradar/models/genre.dart';
 import 'package:movieradar/ui/widgets/bottom_navigation.dart';
 import 'package:movieradar/ui/widgets/cast_member_card.dart';
@@ -16,7 +17,19 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
+  bool _isFavourite = false;
+
+  Future<void> _checkFavouriteStatus() async {
+    final isFavourite =
+        await DatabaseHelper.instance.isFavoriteMovie(widget.id);
+    setState(() {
+      _isFavourite = isFavourite;
+    });
+  }
+
+  @override
   void initState() {
+    _checkFavouriteStatus();
     super.initState();
   }
 
@@ -44,7 +57,8 @@ class _MoviePageState extends State<MoviePage> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MovieDetailCubit>(
-          create: (context) => MovieDetailCubit()..getMovieDetails(widget.id),
+          create: (context) =>
+              MovieDetailCubit()..getMovieDetails(widget.id, context),
         ),
         BlocProvider<MovieCreditCubit>(
           create: (context) => MovieCreditCubit()..getMovieCredits(widget.id),
@@ -54,13 +68,33 @@ class _MoviePageState extends State<MoviePage> {
         body: SafeArea(
           child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
             builder: (context, state) {
+              void toggleFavourite() {
+                setState(() {
+                  _isFavourite = !_isFavourite;
+                });
+
+                final movieState = context.read<MovieDetailCubit>().state;
+                if (movieState is MovieDetailLoaded) {
+                  if (_isFavourite) {
+                    DatabaseHelper.instance.addFavouriteMovie(movieState.movie);
+                  } else {
+                    // Remove the movie from favorites
+                    DatabaseHelper.instance
+                        .removeFavouriteMovie(movieState.movie.id!);
+                  }
+                }
+              }
+
               if (state is MovieDetailLoading) {
                 return CircularProgressIndicator();
               } else if (state is MovieDetailLoaded) {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      MovieDetailPoster(movie: state.movie),
+                      MovieDetailPoster(
+                        movie: state.movie,
+                        onFavouritePressed: toggleFavourite,
+                      ),
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Column(

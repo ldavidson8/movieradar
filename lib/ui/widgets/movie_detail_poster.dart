@@ -5,8 +5,14 @@ import 'package:movieradar/ui/widgets/custom_shimmer.dart';
 import 'package:movieradar/ui/widgets/movie_detail_app_bar.dart';
 
 class MovieDetailPoster extends StatelessWidget {
-  const MovieDetailPoster({super.key, required this.movie});
+  const MovieDetailPoster({
+    super.key,
+    required this.movie,
+    required this.onFavouritePressed,
+  });
   final MovieDetails movie;
+  final bool isFavourite = false;
+  final VoidCallback onFavouritePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +33,8 @@ class MovieDetailPoster extends StatelessWidget {
           top: 55,
           child: MovieDetailAppBar(
             movie: movie,
+            isFavourite: isFavourite,
+            onFavouritePressed: () => onFavouritePressed(),
           ),
         ),
       ],
