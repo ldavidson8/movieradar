@@ -30,16 +30,24 @@ class TMDBRepository {
   }
 
   Future<List<MovieModel>> getTopMovies() async {
-    final url = _tmdbApi.topRatedUrl;
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(_tmdbApi.popularUrl));
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final List<dynamic> movieData = body['results'];
-      final List<MovieModel> movies = movieData
-          .map<MovieModel>((data) => MovieModel.fromJson(data))
-          .toList();
-      return movies;
+      try {
+        final data = jsonDecode(response.body);
+        if (data['results'] != null) {
+          return data['results']
+              .map<MovieModel>((json) => MovieModel.fromMap(json))
+              .toList();
+        } else {
+          dev.log('Results field null');
+          return [];
+        }
+      } catch (e) {
+        dev.log('Failed to parse data: $e');
+        throw Exception('Failed to parse data');
+      }
     } else {
+      dev.log('Failed to load data: ${response.statusCode}');
       throw Exception('Failed to load data');
     }
   }
@@ -60,31 +68,47 @@ class TMDBRepository {
   }
 
   Future<List<MovieModel>> getTrendingMovies() async {
-    final url = _tmdbApi.trendingUrl;
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(_tmdbApi.trendingUrl));
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final List<dynamic> movieData = body['results'];
-      final List<MovieModel> movies = movieData
-          .map<MovieModel>((data) => MovieModel.fromJson(data))
-          .toList();
-      return movies;
+      try {
+        final data = jsonDecode(response.body);
+        if (data['results'] != null) {
+          return data['results']
+              .map<MovieModel>((json) => MovieModel.fromMap(json))
+              .toList();
+        } else {
+          dev.log('Results field null');
+          return [];
+        }
+      } catch (e) {
+        dev.log('Failed to parse data: $e');
+        throw Exception('Failed to parse data');
+      }
     } else {
+      dev.log('Failed to load data: ${response.statusCode}');
       throw Exception('Failed to load data');
     }
   }
 
   Future<List<MovieModel>> getUpcomingMovies() async {
-    final url = _tmdbApi.upcomingUrl;
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(_tmdbApi.upcomingUrl));
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final List<dynamic> movieData = body['results'];
-      final List<MovieModel> movies = movieData
-          .map<MovieModel>((data) => MovieModel.fromJson(data))
-          .toList();
-      return movies;
+      try {
+        final data = jsonDecode(response.body);
+        if (data['results'] != null) {
+          return data['results']
+              .map<MovieModel>((json) => MovieModel.fromMap(json))
+              .toList();
+        } else {
+          dev.log('Results field null');
+          return [];
+        }
+      } catch (e) {
+        dev.log('Failed to parse data: $e');
+        throw Exception('Failed to parse data');
+      }
     } else {
+      dev.log('Failed to load data: ${response.statusCode}');
       throw Exception('Failed to load data');
     }
   }
