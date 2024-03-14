@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movieradar/repositories/models/User.dart';
+import 'package:movieradar/models/User.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
