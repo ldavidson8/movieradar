@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieradar/blocs/popularmovie/popular_movie_cubit.dart';
-import 'package:movieradar/blocs/trendingmovie/trendingmovies_cubit.dart';
+import 'package:movieradar/blocs/trendingmovie/trendingmovie_cubit.dart';
 import 'package:movieradar/models/movie_model.dart';
 import 'package:movieradar/ui/widgets/carousel_item.dart';
 import 'package:movieradar/ui/widgets/movie_card.dart';
@@ -25,9 +25,9 @@ class MoviesTab extends StatelessWidget {
         height: 350,
         autoPlay: true,
         aspectRatio: 1,
-        autoPlayInterval: Duration(seconds: 3),
-        autoPlayAnimationDuration: Duration(milliseconds: 1000),
-        autoPlayCurve: Curves.fastOutSlowIn,
+        autoPlayInterval: Duration(seconds: 7),
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
         viewportFraction: 0.9,
         enlargeCenterPage: true,
       ),
