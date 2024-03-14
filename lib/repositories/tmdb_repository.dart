@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer' as dev;
 import 'package:movieradar/data/tmdb_api.dart';
 import 'package:http/http.dart' as http;
+import 'package:movieradar/models/movie_cast/movie_cast.dart';
+import 'package:movieradar/models/movie_details.dart';
 import 'package:movieradar/models/movie_model.dart';
 
 class TMDBRepository {
@@ -113,15 +115,27 @@ class TMDBRepository {
     }
   }
 
-  Future<MovieModel> getMovieDetails(int movieId) async {
-    final url = _tmdbApi.movieDetailsUrl(movieId);
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final MovieModel movie = MovieModel.fromJson(body);
-      return movie;
-    } else {
-      throw Exception('Failed to load data');
+  Future<MovieDetails> getMovieDetails(int movieId) async {
+    try {
+      final response =
+          await http.get(Uri.parse(_tmdbApi.movieDetailsUrl(movieId)));
+      final data = jsonDecode(response.body);
+      return MovieDetails.fromJson(data);
+    } catch (e) {
+      dev.log('Failed to parse data: $e');
+      throw Exception('Failed to parse data');
+    }
+  }
+
+  Future<MovieCast> getMovieCredits(int movieId) async {
+    try {
+      final response =
+          await http.get(Uri.parse(_tmdbApi.movieCreditsUrl(movieId)));
+      final data = jsonDecode(response.body);
+      return MovieCast.fromJson(data);
+    } catch (e) {
+      dev.log('Failed to parse data: $e');
+      throw Exception('Failed to parse data');
     }
   }
 
@@ -140,18 +154,41 @@ class TMDBRepository {
     }
   }
 
-  Future<List<MovieModel>> searchForMovies(String query) async {
-    final url = _tmdbApi.searchUrl(query);
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final List<dynamic> movieData = body['results'];
-      final List<MovieModel> movies = movieData
-          .map<MovieModel>((data) => MovieModel.fromJson(data))
-          .toList();
-      return movies;
-    } else {
-      throw Exception('Failed to load data');
+  Future<List<MovieModel>> searchForMovies({
+    required String query,
+    bool? includeAdult,
+    String? language,
+    int? primaryReleaseYear,
+    int? page,
+    String? region,
+    int? year,
+  }) async {
+    final url = Uri.parse(_tmdbApi.searchUrl()).replace(queryParameters: {
+      if (includeAdult != null) 'include_adult': includeAdult.toString(),
+      if (language != null) 'language': language,
+      if (primaryReleaseYear != null)
+        'primary_release_year': primaryReleaseYear.toString(),
+      if (page != null) 'page': page.toString(),
+      if (region != null) 'region': region,
+      if (year != null) 'year': year.toString(),
+    });
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['results'] != null) {
+          return data['results']
+              .map<MovieModel>((json) => MovieModel.fromMap(json))
+              .toList();
+        } else {
+          throw Exception('Failed to load movies');
+        }
+      } else {
+        throw Exception('Failed to load movies');
+      }
+    } catch (e) {
+      throw Exception('Failed to load movies: $e');
     }
   }
 }

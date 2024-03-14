@@ -24,6 +24,7 @@ class TMDBApi {
       '$_baseUrl/movie/$movieId?api_key=$apiKey';
   String movieRecommendationsUrl(int movieId) =>
       '$_baseUrl/movie/$movieId/recommendations?api_key=$apiKey&page=1';
-  String searchUrl(String query) =>
-      '$_baseUrl/search/movie?api_key=$apiKey&query=$query&page=1';
+  String searchUrl() => '$_baseUrl/search/movie?api_key=$apiKey&page=1';
+  String movieCreditsUrl(int movieId) =>
+      '$_baseUrl/movie/$movieId/credits?api_key=$apiKey';
 }
