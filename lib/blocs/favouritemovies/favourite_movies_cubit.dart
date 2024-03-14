@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movieradar/data/database_helper.dart';
 import 'package:movieradar/models/movie_details.dart';
