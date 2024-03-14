@@ -59,6 +59,7 @@ class MoviesTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(height: 32),
           BlocBuilder<PopularMovieCubit, PopularMovieState>(
             builder: (context, state) {
               if (state is PopularMovieLoading) {
