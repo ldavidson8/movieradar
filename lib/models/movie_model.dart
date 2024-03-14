@@ -37,8 +37,7 @@ class MovieModel extends Equatable {
 
   factory MovieModel.fromMap(Map<String, dynamic> json) => MovieModel(
         adult: json['adult'] as bool?,
-        backdropPath: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}'
-            as String?,
+        backdropPath: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
         genreIds: (json['genre_ids'] as List<dynamic>?)?.cast<int>(),
         id: json['id'] as int?,
         originalLanguage: json['original_language'] as String?,
@@ -46,8 +45,7 @@ class MovieModel extends Equatable {
         overview: json['overview'] as String?,
         popularity:
             json['popularity'] == null ? 0.0 : json['popularity'] as double?,
-        posterPath: 'https://image.tmdb.org/t/p/w500${json['[poster_path]']}'
-            as String?,
+        posterPath: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
         releaseDate: json['release_date'] as String?,
         title: json['title'] as String?,
         video: json['video'] as bool?,
