@@ -22,8 +22,13 @@ class MoviesTab extends StatelessWidget {
         );
       }).toList(),
       options: CarouselOptions(
+        height: 350,
         autoPlay: true,
-        viewportFraction: 1,
+        aspectRatio: 1,
+        autoPlayInterval: Duration(seconds: 3),
+        autoPlayAnimationDuration: Duration(milliseconds: 1000),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        viewportFraction: 0.9,
         enlargeCenterPage: true,
       ),
     );
@@ -49,67 +54,69 @@ class MoviesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        BlocBuilder<PopularMovieCubit, PopularMovieState>(
-          builder: (context, state) {
-            if (state is PopularMovieLoading) {
-              return Container(
-                height: 300,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else if (state is PopularMovieLoaded) {
-              return Align(
-                alignment: Alignment.topCenter,
-                child: Stack(
-                  children: [
-                    _buildCarouselSlider(context, state.movies),
-                  ],
-                ),
-              );
-            } else if (state is PopularMovieError) {
-              return Container(
-                child: Center(
-                  child: Text(state.message),
-                ),
-              );
-            } else {
-              return Container(
-                child: Text('Something went wrong'),
-              );
-            }
-          },
-        ),
-        SizedBox(height: 10),
-        Text('Popular Movies', style: Theme.of(context).textTheme.titleLarge),
-        SizedBox(height: 10),
-        BlocBuilder<TrendingMovieCubit, TrendingMovieState>(
-          builder: (context, state) {
-            if (state is TrendingMovieLoading) {
-              return Container(
-                height: 300,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else if (state is TrendingMovieLoaded) {
-              return _buildMovieSlider(context, state.movies);
-            } else if (state is TrendingMovieError) {
-              return Container(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          BlocBuilder<PopularMovieCubit, PopularMovieState>(
+            builder: (context, state) {
+              if (state is PopularMovieLoading) {
+                return Container(
+                  height: 200,
                   child: Center(
-                child: Text(state.message),
-              ));
-            } else {
-              return Container(
-                child: Text('Something went wrong'),
-              );
-            }
-          },
-        ),
-      ],
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else if (state is PopularMovieLoaded) {
+                return SizedBox(
+                  child: _buildCarouselSlider(context, state.movies),
+                );
+              } else if (state is PopularMovieError) {
+                return Container(
+                  child: Center(
+                    child: Text(state.message),
+                  ),
+                );
+              } else {
+                return Container(
+                  child: Text('Something went wrong'),
+                );
+              }
+            },
+          ),
+          SizedBox(height: 48),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text('Popular Movies',
+                style: Theme.of(context).textTheme.titleLarge),
+          ),
+          SizedBox(height: 10),
+          BlocBuilder<TrendingMovieCubit, TrendingMovieState>(
+            builder: (context, state) {
+              if (state is TrendingMovieLoading) {
+                return Container(
+                  height: 400,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else if (state is TrendingMovieLoaded) {
+                return _buildMovieSlider(context, state.movies);
+              } else if (state is TrendingMovieError) {
+                return Container(
+                    child: Center(
+                  child: Text(state.message),
+                ));
+              } else {
+                return Container(
+                  child: Text('Something went wrong'),
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

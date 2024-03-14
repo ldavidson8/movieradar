@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,11 +34,13 @@ class MovieCard extends StatelessWidget {
           ),
           if (title != null) ...[
             SizedBox(height: 8),
-            Text(
+            AutoSizeText(
               title!,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
           ],
         ],

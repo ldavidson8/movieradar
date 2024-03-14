@@ -20,7 +20,13 @@ class _MoviePageState extends State<MoviePage> {
     super.initState();
   }
 
-  Widget _buildGenreWidget(List<Genre> genres) {
+  Widget _buildGenreWidget(List<Genre>? genres) {
+    if (genres == null || genres.isEmpty) {
+      return Text(
+        'No genres available',
+        style: Theme.of(context).textTheme.bodyMedium,
+      );
+    }
     return Wrap(
       spacing: 8.0,
       runSpacing: 4.0,
@@ -67,33 +73,36 @@ class _MoviePageState extends State<MoviePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    state.movie.title!,
+                                    state.movie.title ??
+                                        'Movie title not available',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .displaySmall,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    child: Icon(
-                                      Icons.favorite,
-                                      color: Colors.red,
-                                      size: 24,
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                    ),
+                                        .displaySmall!
+                                        .copyWith(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                   ),
                                 ],
                               ),
                             ),
-                            Text(
-                              state.movie.releaseDate!,
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            _buildGenreWidget(state.movie.genres!),
                             SizedBox(height: 10),
                             Text(
-                              state.movie.overview!,
+                              state.movie.releaseDate ??
+                                  'Release date not available',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                            ),
+                            SizedBox(height: 10),
+                            _buildGenreWidget(state.movie.genres),
+                            SizedBox(height: 10),
+                            Text(
+                              state.movie.overview ?? 'Overview not available',
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             SizedBox(height: 10),
@@ -113,27 +122,30 @@ class _MoviePageState extends State<MoviePage> {
                                   return CircularProgressIndicator();
                                 } else if (state is MovieCreditLoaded) {
                                   final cast = state.movieCast.cast;
-
-                                  return GridView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      childAspectRatio: 0.5,
-                                      mainAxisSpacing: 8,
-                                      crossAxisSpacing: 8,
-                                    ),
-                                    itemCount: cast!.length,
-                                    itemBuilder: (context, index) {
-                                      final castMember = cast[index];
-                                      return CastMemberCard(
-                                        name: castMember.name ?? 'Unknown',
-                                        profilePath: castMember.profilePath!,
-                                        character: castMember.character,
-                                      );
-                                    },
-                                  );
+                                  if (cast != null && cast.isNotEmpty) {
+                                    return GridView.builder(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        childAspectRatio: 0.5,
+                                        mainAxisSpacing: 8,
+                                        crossAxisSpacing: 8,
+                                      ),
+                                      itemCount: cast.length,
+                                      itemBuilder: (context, index) {
+                                        final castMember = cast[index];
+                                        return CastMemberCard(
+                                          name: castMember.name ?? 'Unknown',
+                                          profilePath: castMember.profilePath!,
+                                          character: castMember.character,
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    return Text('No cast members available');
+                                  }
                                 } else {
                                   return Text('Error loading movie credits');
                                 }
