@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieradar/cubits/theme_cubit.dart';
+import 'package:movieradar/blocs/theme_cubit.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});

@@ -5,10 +5,10 @@ import 'package:movieradar/blocs/theme_cubit.dart';
 import 'package:movieradar/themes.dart';
 import 'package:movieradar/ui/screens/error.dart';
 
-import 'package:movieradar/ui/screens/home.dart';
+import 'package:movieradar/ui/screens/Home/home.dart';
 import 'package:movieradar/ui/screens/search.dart';
 import 'package:movieradar/ui/screens/favourites.dart';
-import 'package:movieradar/ui/screens/settings.dart';
+import 'package:movieradar/ui/screens/Settings/settings.dart';
 import 'package:movieradar/ui/screens/login.dart';
 import 'package:movieradar/ui/screens/movie_page.dart';
 

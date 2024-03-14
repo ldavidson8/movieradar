@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movieradar/ui/widgets/SettingsTabs/profile_tab.dart';
-import 'package:movieradar/ui/widgets/SettingsTabs/settings_tab.dart';
+import 'package:movieradar/ui/screens/Settings/Tabs/profile_tab.dart';
+import 'package:movieradar/ui/screens/Settings/Tabs/settings_tab.dart';
 import 'package:movieradar/ui/widgets/app_bar.dart';
 import 'package:movieradar/ui/widgets/bottom_navigation.dart';
 

@@ -18,7 +18,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   final Widget avatarCircle = const CircleAvatar(
     radius: 20.0,
-    backgroundImage: NetworkImage('https://avatar.vercel.sh/rauchg?size=30'),
+    backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
   );
 
   final List<PopupMenuEntry<String>> _menuItems = [
