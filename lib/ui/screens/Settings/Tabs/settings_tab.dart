@@ -15,19 +15,23 @@ class SettingsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, selectedTheme) {
-        return Column(
-          children: List.generate(
-            _themes.length,
-            (index) {
-              final String label = _themes[index].$1;
-              final ThemeMode theme = _themes[index].$2;
-              return ListTile(
-                title: Text(label),
-                onTap: () => context.read<ThemeCubit>().updateTheme(theme),
-                trailing:
-                    selectedTheme == theme ? const Icon(Icons.check) : null,
-              );
-            },
+        return Scaffold(
+          body: Column(
+            children: List.generate(
+              _themes.length,
+              (index) {
+                final String label = _themes[index].$1;
+                final ThemeMode theme = _themes[index].$2;
+                return ListTile(
+                  title: Text(label),
+                  onTap: () {
+                    context.read<ThemeCubit>().updateTheme(theme);
+                  },
+                  trailing:
+                      selectedTheme == theme ? const Icon(Icons.check) : null,
+                );
+              },
+            ),
           ),
         );
       },
