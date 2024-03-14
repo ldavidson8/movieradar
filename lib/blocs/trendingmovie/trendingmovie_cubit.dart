@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:movieradar/models/movie_model.dart';
 import 'package:movieradar/repositories/tmdb_repository.dart';
 
-part 'trendingmovies_state.dart';
+part 'trendingmovie_state.dart';
 
 class TrendingMovieCubit extends Cubit<TrendingMovieState> {
   TrendingMovieCubit() : super(TrendingMovieInitial());

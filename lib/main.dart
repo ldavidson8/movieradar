@@ -7,10 +7,10 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:movieradar/blocs/authentication/authentication_bloc.dart';
 import 'package:movieradar/blocs/nowplayingmovie/now_playing_movies_cubit.dart';
 import 'package:movieradar/blocs/popularmovie/popular_movie_cubit.dart';
-import 'package:movieradar/blocs/trendingmovie/trendingmovies_cubit.dart';
+import 'package:movieradar/blocs/trendingmovie/trendingmovie_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:movieradar/blocs/bottom_navigation_bloc.dart';
-import 'package:movieradar/cubits/theme_cubit.dart';
+import 'package:movieradar/blocs/theme_cubit.dart';
 import 'package:movieradar/ui/widgets/app.dart';
 import 'firebase_options.dart';
 

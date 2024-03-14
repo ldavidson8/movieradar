@@ -1,4 +1,4 @@
-part of 'trendingmovies_cubit.dart';
+part of 'trendingmovie_cubit.dart';
 
 sealed class TrendingMovieState extends Equatable {
   const TrendingMovieState();
