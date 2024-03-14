@@ -5,24 +5,24 @@ import 'package:movieradar/models/movie_model.dart';
 import 'package:movieradar/repositories/tmdb_repository.dart';
 import 'package:movieradar/utils/connectivity_checker.dart';
 
-part 'trendingmovie_state.dart';
+part 'top_movies_state.dart';
 
-class TrendingMovieCubit extends Cubit<TrendingMovieState> {
-  TrendingMovieCubit() : super(TrendingMovieInitial());
+class TopMoviesCubit extends Cubit<TopMoviesState> {
+  TopMoviesCubit() : super(TopMoviesInitial());
 
   final TMDBRepository _tmdbRepository = TMDBRepository();
   final ConnectivityChecker _connectivityChecker = ConnectivityChecker();
 
-  Future<void> getTrendingMovies(BuildContext context) async {
+  Future<void> getTopMovies(BuildContext context) async {
     await _connectivityChecker.checkConnectivity(
       context,
       () async {
         try {
-          emit(TrendingMovieLoading());
-          final trendingMovies = await _tmdbRepository.getTrendingMovies();
-          emit(TrendingMovieLoaded(trendingMovies));
+          emit(TopMoviesLoading());
+          final topMovies = await _tmdbRepository.getTopMovies();
+          emit(TopMoviesLoaded(topMovies));
         } catch (e) {
-          emit(TrendingMovieError(e.toString()));
+          emit(TopMoviesError(e.toString()));
         }
       },
     );

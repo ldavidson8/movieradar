@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer' as dev;
 import 'package:movieradar/data/tmdb_api.dart';
 import 'package:http/http.dart' as http;
+import 'package:movieradar/models/genre.dart';
 import 'package:movieradar/models/movie_cast/movie_cast.dart';
 import 'package:movieradar/models/movie_details.dart';
 import 'package:movieradar/models/movie_model.dart';
@@ -136,6 +137,29 @@ class TMDBRepository {
     } catch (e) {
       dev.log('Failed to parse data: $e');
       throw Exception('Failed to parse data');
+    }
+  }
+
+  Future<List<Genre>> getMovieGenres() async {
+    final response = await http.get(Uri.parse(_tmdbApi.movieGenreUrl));
+    if (response.statusCode == 200) {
+      try {
+        final data = jsonDecode(response.body);
+        if (data['genres'] != null) {
+          return data['genres']
+              .map<Genre>((json) => Genre.fromMap(json))
+              .toList();
+        } else {
+          dev.log('Genres field null');
+          return [];
+        }
+      } catch (e) {
+        dev.log('Failed to parse data: $e');
+        throw Exception('Failed to parse data');
+      }
+    } else {
+      dev.log('Failed to load data: ${response.statusCode}');
+      throw Exception('Failed to load data');
     }
   }
 
