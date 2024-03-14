@@ -21,11 +21,13 @@ class MovieDetailPoster extends StatelessWidget {
             placeholder: (context, url) => const CustomShimmer(),
           ),
         ),
-        const Positioned(
+        Positioned(
           left: 10,
           right: 10,
           top: 55,
-          child: MovieDetailAppBar(),
+          child: MovieDetailAppBar(
+            movie: movie,
+          ),
         ),
       ],
     );
