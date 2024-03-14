@@ -10,7 +10,7 @@ class NewTrendingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TrendingMovieCubit>(
-      create: (context) => TrendingMovieCubit()..getTrendingMovies(),
+      create: (context) => TrendingMovieCubit()..getTrendingMovies(context),
       child: BlocBuilder<TrendingMovieCubit, TrendingMovieState>(
         builder: (context, state) {
           if (state is TrendingMovieLoading) {

@@ -14,27 +14,25 @@ class Home extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: CustomAppBar(title: 'Movies'),
-        body: SafeArea(
-          child: Column(
-            children: [
-              TabBar(
-                tabs: [
-                  Tab(text: 'Movies'),
-                  Tab(text: 'Series'),
-                  Tab(text: 'New & Trending'),
+        body: Column(
+          children: [
+            TabBar(
+              tabs: [
+                Tab(text: 'Movies'),
+                Tab(text: 'Series'),
+                Tab(text: 'New & Trending'),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  MoviesTab(),
+                  TvSeriesTab(),
+                  NewTrendingTab(),
                 ],
               ),
-              Flexible(
-                child: TabBarView(
-                  children: [
-                    MoviesTab(),
-                    TvSeriesTab(),
-                    NewTrendingTab(),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
         bottomNavigationBar: const AppBottomNavigation(),
       ),
