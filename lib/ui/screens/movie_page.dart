@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieradar/blocs/cubit/movie_credit_cubit.dart';
+import 'package:movieradar/blocs/moviecredit/movie_credit_cubit.dart';
 import 'package:movieradar/blocs/moviedetail/movie_detail_cubit.dart';
 import 'package:movieradar/models/genre.dart';
 import 'package:movieradar/ui/widgets/bottom_navigation.dart';

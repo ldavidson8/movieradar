@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movieradar/ui/widgets/HomeTabs/movies_tab.dart';
-import 'package:movieradar/ui/widgets/HomeTabs/new_trending_tab.dart';
-import 'package:movieradar/ui/widgets/HomeTabs/tv_series_tab.dart';
+import 'package:movieradar/ui/screens/Home/Tabs/movies_tab.dart';
+import 'package:movieradar/ui/screens/Home/Tabs/new_trending_tab.dart';
+import 'package:movieradar/ui/screens/Home/Tabs/tv_series_tab.dart';
 import 'package:movieradar/ui/widgets/app_bar.dart';
 import 'package:movieradar/ui/widgets/bottom_navigation.dart';
 
