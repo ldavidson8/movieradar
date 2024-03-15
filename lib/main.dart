@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:movieradar/blocs/auth/auth_bloc.dart';
 import 'package:movieradar/blocs/login/login_bloc.dart';
 import 'package:movieradar/blocs/moviegenres/movie_genres_cubit.dart';
 import 'package:movieradar/blocs/nowplayingmovie/now_playing_movies_cubit.dart';
@@ -33,6 +34,9 @@ Future<void> main() async {
       providers: [
         BlocProvider<BottomNavigationBloc>(
           create: (context) => BottomNavigationBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AuthBloc(),
         ),
         BlocProvider<LoginBloc>(
           create: (context) => LoginBloc(),

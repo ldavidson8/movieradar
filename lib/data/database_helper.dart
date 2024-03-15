@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:movieradar/models/genre.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:movieradar/models/movie_details.dart';

@@ -16,9 +16,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _onLoginAsGuest(
-      LoginAsGuest event, Emitter<LoginState> emit) async {
+    LoginAsGuest event,
+    Emitter<LoginState> emit,
+  ) async {
     emit(LoggingIn());
-
     try {
       await _auth.signInAnonymously();
       emit(LoggedIn());
@@ -38,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       emit(LoggedIn());
     } on FirebaseAuthException catch (e) {
-      emit(LoginFailure(e.message!));
+      emit(LoginFailure(e.message ?? 'Unknown error'));
     }
   }
 
@@ -53,7 +54,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       emit(LoggedIn());
     } on FirebaseAuthException catch (e) {
-      emit(LoginFailure(e.message!));
+      emit(LoginFailure(e.message ?? 'Unknown error'));
     }
   }
 
