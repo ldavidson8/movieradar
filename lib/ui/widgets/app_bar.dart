@@ -35,6 +35,39 @@ class _CustomAppBarState extends State<CustomAppBar> {
           return AppBar(
             title: Text(widget.title),
             actions: [
+              if (isLoggedIn)
+                PopupMenuButton(
+                  icon: avatarCircle,
+                  onSelected: (String value) {
+                    switch (value) {
+                      case '1':
+                        context.go('/profile');
+                        break;
+                      case '2':
+                        context.go('/settings');
+                        break;
+                      case '3':
+                        context.read<LoginBloc>().add(Logout());
+                        break;
+                      default:
+                        break;
+                    }
+                  },
+                  itemBuilder: (BuildContext context) => [
+                    const PopupMenuItem(
+                      value: '1',
+                      child: Text('Profile'),
+                    ),
+                    const PopupMenuItem(
+                      value: '2',
+                      child: Text('Settings'),
+                    ),
+                    const PopupMenuItem(
+                      value: '3',
+                      child: Text('Logout'),
+                    ),
+                  ],
+                ),
               if (!isLoggedIn)
                 IconButton(
                   onPressed: () {
@@ -42,43 +75,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   },
                   icon: const Icon(Icons.login),
                 ),
-              PopupMenuButton(
-                icon: avatarCircle,
-                onSelected: (String value) {
-                  switch (value) {
-                    case '1':
-                      context.go('/profile');
-                      break;
-                    case '2':
-                      context.go('/settings');
-                      break;
-                    case '3':
-                      if (isLoggedIn) {
-                        context.read().add(Logout());
-                      } else {
-                        context.go('/login');
-                      }
-                      break;
-                    default:
-                      break;
-                  }
-                },
-                itemBuilder: (BuildContext context) => [
-                  const PopupMenuItem(
-                    value: '1',
-                    child: Text('Profile'),
-                  ),
-                  const PopupMenuItem(
-                    value: '2',
-                    child: Text('Settings'),
-                  ),
-                  PopupMenuItem(
-                    value: '3',
-                    child:
-                        isLoggedIn ? const Text('Logout') : const Text('Login'),
-                  ),
-                ],
-              )
             ],
           );
         },
