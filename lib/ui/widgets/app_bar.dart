@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movieradar/blocs/authentication/authentication_bloc.dart';
+import 'package:movieradar/blocs/login/login_bloc.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key, required this.title});
@@ -21,53 +21,68 @@ class _CustomAppBarState extends State<CustomAppBar> {
     backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
   );
 
-  final List<PopupMenuEntry<String>> _menuItems = [
-    const PopupMenuItem(
-      value: '1',
-      child: Text('Profile'),
-    ),
-    const PopupMenuItem(
-      value: '2',
-      child: Text('Settings'),
-    ),
-    PopupMenuItem(
-      value: '3',
-      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        builder: (context, state) {
-          if (state is Authenticated) {
-            return const Text('Logout');
-          } else {
-            return const Text('Login');
-          }
-        },
-      ),
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(widget.title),
-      actions: <Widget>[
-        PopupMenuButton<String>(
-          icon: avatarCircle,
-          onSelected: (String value) {
-            switch (value) {
-              case '1':
-                context.go('/profile');
-                break;
-              case '2':
-                context.go('/settings');
-                break;
-              case '3':
-                context.go('/login');
-                break;
-              default:
-                break;
-            }
-          },
-          itemBuilder: (BuildContext context) => _menuItems,
-        ),
-      ],
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is NotLoggedIn) {
+          context.go('/login');
+        }
+      },
+      child: BlocBuilder<LoginBloc, LoginState>(
+        builder: (context, state) {
+          final isLoggedIn = state is LoggedIn;
+          return AppBar(
+            title: Text(widget.title),
+            actions: [
+              if (!isLoggedIn)
+                IconButton(
+                  onPressed: () {
+                    context.go('/login');
+                  },
+                  icon: const Icon(Icons.login),
+                ),
+              PopupMenuButton(
+                icon: avatarCircle,
+                onSelected: (String value) {
+                  switch (value) {
+                    case '1':
+                      context.go('/profile');
+                      break;
+                    case '2':
+                      context.go('/settings');
+                      break;
+                    case '3':
+                      if (isLoggedIn) {
+                        context.read().add(Logout());
+                      } else {
+                        context.go('/login');
+                      }
+                      break;
+                    default:
+                      break;
+                  }
+                },
+                itemBuilder: (BuildContext context) => [
+                  const PopupMenuItem(
+                    value: '1',
+                    child: Text('Profile'),
+                  ),
+                  const PopupMenuItem(
+                    value: '2',
+                    child: Text('Settings'),
+                  ),
+                  PopupMenuItem(
+                    value: '3',
+                    child:
+                        isLoggedIn ? const Text('Logout') : const Text('Login'),
+                  ),
+                ],
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }
